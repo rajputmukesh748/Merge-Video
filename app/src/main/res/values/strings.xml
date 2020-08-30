@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VideoMerge</string>
+    <string name="throw_exception">View model class not find.</string>
+</resources>

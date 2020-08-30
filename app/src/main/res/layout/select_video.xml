@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="selectVideoVM"
+            type="com.mukesh.videomerge.view.selectvideo.SelectVideoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/btGallery"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Camera"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="10dp"
+            android:background="@android:color/holo_red_light"
+            android:drawableStart="@drawable/ic_baseline_camera_24"
+            android:onClick="@{() -> selectVideoVM.cameraSelect()}"
+            />
+
+
+        <Button
+            android:id="@+id/btGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btCamera"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Gallery"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="10dp"
+            android:background="@android:color/holo_red_light"
+            android:drawableStart="@drawable/ic_baseline_file_copy_24"
+            android:onClick="@{() -> selectVideoVM.gallerySelect()}"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvVideoList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btGallery"
+            app:layout_constraintBottom_toTopOf="@+id/btMergeVideo"
+            android:layout_margin="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            adapter="@{selectVideoVM.selectVideoAdapter}"
+            />
+
+        <Button
+            android:id="@+id/btMergeVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btPlayVideo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Merge Video"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="10dp"
+            android:background="@android:color/holo_red_light"
+            android:drawableStart="@drawable/ic_convert_video"
+            android:onClick="@{() -> selectVideoVM.mergeClick()}"
+            />
+
+        <Button
+            android:id="@+id/btPlayVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintStart_toEndOf="@+id/btMergeVideo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Play Video"
+            android:visibility="@{selectVideoVM.selectVideoData.mergeVideoPath.equalsIgnoreCase(``) ? View.GONE : View.VISIBLE}"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="10dp"
+            android:background="@android:color/holo_red_light"
+            android:drawableStart="@drawable/ic_play"
+            android:onClick="@{() -> selectVideoVM.playVideo()}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
